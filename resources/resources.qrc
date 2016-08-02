@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>logo-error.png</file>
+        <file>logo-success.png</file>
+        <file>logo-uploading.png</file>
+        <file>logo.png</file>
+        <file>logo.ico</file>
+    </qresource>
+</RCC>
