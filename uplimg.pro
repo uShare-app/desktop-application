@@ -3,7 +3,8 @@ QT += qml quick quickcontrols2 widgets
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    systemtrayicon.cpp
+    systemtrayicon.cpp \
+    network/httpfileuploader.cpp
 
 RESOURCES += qml.qrc \
     resources/resources.qrc
@@ -14,5 +15,5 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-HEADERS += \
-    systemtrayicon.h
+HEADERS += systemtrayicon.h \
+    network/httpfileuploader.h
