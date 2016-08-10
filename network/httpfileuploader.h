@@ -10,6 +10,7 @@
 #include <QThread>
 #include <QUrl>
 #include <QObject>
+#include <QSslConfiguration>
 
 /* This class upload file to the server.
  * It follow the Uplimg API. See https://doc.uplmg.com

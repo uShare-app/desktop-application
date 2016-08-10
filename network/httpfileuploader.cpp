@@ -48,6 +48,9 @@ void HttpFileUploader::sendFile()
         return;
     }
 
+    QSslConfiguration sslConfig;
+    sslConfig.setProtocol(QSsl::SecureProtocols);
+
     QHttpPart filePart;
     QVariant fileHeader("form-data; name=\"file\"; filename=\""
                         + file.fileName() + "\"");
@@ -65,6 +68,7 @@ void HttpFileUploader::sendFile()
 
     QNetworkRequest request;
     request.setUrl(url);
+    request.setSslConfiguration(sslConfig);
     manager = new QNetworkAccessManager(this);
     reply = manager->post(request, container);
 
