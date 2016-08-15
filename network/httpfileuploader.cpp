@@ -41,6 +41,8 @@ QString HttpFileUploader::getResponse()
 
 void HttpFileUploader::sendFile()
 {
+    HttpFileUploader * self = this;
+
     if (!file.open(QIODevice::ReadOnly))
     {
         status = Status::FILE_ERROR;
@@ -72,8 +74,10 @@ void HttpFileUploader::sendFile()
     manager = new QNetworkAccessManager(this);
     reply = manager->post(request, container);
 
-    QObject::connect(reply, &QNetworkReply::finished, this,
-                     &HttpFileUploader::finished);
+    QObject::connect(reply, &QNetworkReply::finished, [=]()
+    {
+        emit (finished(self));
+    });
     QObject::connect(reply, &QNetworkReply::uploadProgress, this,
                      &HttpFileUploader::uploadProgress);
     QObject::connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this,

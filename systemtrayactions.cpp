@@ -22,9 +22,10 @@ void SystemTrayActions::captureScreen()
         qDebug() << bytesSent << "/" << bytesTotal;
     });
 
-    QObject::connect(http, &HttpFileUploader::finished, [=]()
+    QObject::connect(http, &HttpFileUploader::finished, [=](HttpFileUploader * sender)
     {
-        qDebug() << http->getResponse();
+        qDebug() << sender->getResponse();
+        sender->deleteLater();
     });
 
     http->sendFile();

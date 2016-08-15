@@ -39,7 +39,7 @@ public slots:
 
 signals:
     void uploadProgress(qint64 bytesSent, qint64 bytesTotal);
-    void finished();
+    void finished(HttpFileUploader *);
     void error(QNetworkReply::NetworkError);
     void statusChanged(Status);
 
