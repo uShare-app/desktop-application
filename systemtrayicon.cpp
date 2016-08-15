@@ -14,6 +14,7 @@ SystemTrayIcon::SystemTrayIcon()
     root->addSeparator();
     root->addAction("Uplimg 1.0 Nightly")->setDisabled(true);
 
+    connect(captureScreen, &QAction::triggered, &actions, &SystemTrayActions::captureScreen);
     connect(quit, &QAction::triggered, qApp, &QApplication::quit);
 
     setContextMenu(root);

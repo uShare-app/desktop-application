@@ -4,7 +4,9 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     systemtrayicon.cpp \
-    network/httpfileuploader.cpp
+    network/httpfileuploader.cpp \
+    screencapturer.cpp \
+    systemtrayactions.cpp
 
 RESOURCES += qml.qrc \
     resources/resources.qrc
@@ -16,4 +18,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += systemtrayicon.h \
-    network/httpfileuploader.h
+    network/httpfileuploader.h \
+    screencapturer.h \
+    systemtrayactions.h

@@ -1,16 +1,16 @@
 #ifndef HTTPFILEUPLOADER_H
 #define HTTPFILEUPLOADER_H
 
-#include <QFile>
-#include <QHttpMultiPart>
-#include <QHttpPart>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QString>
-#include <QThread>
-#include <QUrl>
-#include <QObject>
-#include <QSslConfiguration>
+# include <QFile>
+# include <QHttpMultiPart>
+# include <QHttpPart>
+# include <QNetworkAccessManager>
+# include <QNetworkReply>
+# include <QString>
+# include <QThread>
+# include <QUrl>
+# include <QObject>
+# include <QSslConfiguration>
 
 /* This class upload file to the server.
  * It follow the Uplimg API. See https://doc.uplmg.com

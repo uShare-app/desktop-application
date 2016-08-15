@@ -6,6 +6,8 @@
 # include <QMenu>
 # include <QAction>
 
+# include "systemtrayactions.h"
+
 class SystemTrayIcon : public QSystemTrayIcon
 {
 public:
@@ -18,6 +20,8 @@ private:
     QAction *sendFile;
     QAction *open;
     QAction *quit;
+
+    SystemTrayActions actions;
 };
 
 #endif // SYSTEMTRAYICON_H
