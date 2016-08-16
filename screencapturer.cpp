@@ -1,9 +1,13 @@
 #include "screencapturer.h"
 
+ScreenCapturer::ScreenCapturer(QObject * parent): QObject(parent)
+{
+
+}
+
 QString ScreenCapturer::captureScreen()
 {
     QScreen * screen;
-    static QTemporaryDir dir;
     QPixmap screenshot;
     QString path;
 
@@ -16,6 +20,33 @@ QString ScreenCapturer::captureScreen()
     screenshot = screen->grabWindow(0);
     screenshot.save(path, 0, 0);
     return (path);
+}
+
+void ScreenCapturer::captureArea()
+{
+    QScreen * screen;
+    QPixmap screenshot;
+    QString path;
+    AreaSelecter * selecter;
+
+    screen = QGuiApplication::primaryScreen();
+
+    if (!screen || !dir.isValid())
+        return;
+
+    path = dir.path() + "/" + getNewFileName();
+    screenshot = screen->grabWindow(0);
+
+    selecter = new AreaSelecter;
+    selecter->setPixmap(screenshot);
+    selecter->selectArea();
+
+    QObject::connect(selecter, &AreaSelecter::areaTaken, [=](QRect area)
+    {
+        screenshot.copy(area).save(path, 0, 0);
+        emit done(path);
+        selecter->deleteLater();
+    });
 }
 
 QString ScreenCapturer::getNewFileName()

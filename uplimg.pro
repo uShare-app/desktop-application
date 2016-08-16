@@ -6,7 +6,8 @@ SOURCES += main.cpp \
     systemtrayicon.cpp \
     network/httpfileuploader.cpp \
     screencapturer.cpp \
-    systemtrayactions.cpp
+    systemtrayactions.cpp \
+    areaselecter.cpp
 
 RESOURCES += qml.qrc \
     resources/resources.qrc
@@ -20,4 +21,5 @@ include(deployment.pri)
 HEADERS += systemtrayicon.h \
     network/httpfileuploader.h \
     screencapturer.h \
-    systemtrayactions.h
+    systemtrayactions.h \
+    areaselecter.h
