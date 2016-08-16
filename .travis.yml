@@ -1,0 +1,14 @@
+sudo: required
+dist: trusty
+
+before_install:
+  - sudo add-apt-repository --yes ppa:beineri/opt-qt57-trusty
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get -y install qt57base qt57multimedia qt57quickcontrols2 qt57translations
+
+script:
+  - source /opt/qt57/bin/qt57-env.sh
+  - /opt/qt57/bin/qmake
+  - make
