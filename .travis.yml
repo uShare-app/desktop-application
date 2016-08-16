@@ -1,5 +1,4 @@
 sudo: required
-dist: trusty
 
 before_install:
   - sudo add-apt-repository --yes ppa:beineri/opt-qt57-trusty
@@ -14,7 +13,3 @@ script:
   - make
 
 language: cpp
-
-compiler:
-  - clang
-  - gcc
