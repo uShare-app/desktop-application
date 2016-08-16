@@ -6,9 +6,15 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install qt57base qt57multimedia qt57quickcontrols2 qt57translations
+  - sudo apt-get -y install qt57base qt57multimedia qt57quickcontrols2 qt57translations make build-essential clang
 
 script:
   - source /opt/qt57/bin/qt57-env.sh
   - /opt/qt57/bin/qmake
   - make
+
+language: cpp
+
+compiler:
+  - clang
+  - gcc
