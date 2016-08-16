@@ -23,7 +23,8 @@ QString ScreenCapturer::getNewFileName()
     QTime time = QTime::currentTime();
     QDate date = QDate::currentDate();
 
-    QString fileName = QString::number(date.dayOfYear())
+    QString fileName = QString::number(date.day())
+                       + QString::number(date.month())
                        + QString::number(time.hour())
                        + QString::number(time.minute())
                        + QString::number(time.second());
