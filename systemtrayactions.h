@@ -3,6 +3,7 @@
 
 # include <QDebug>
 
+# include <QFileDialog>
 # include <QObject>
 # include <QPixmap>
 # include <QString>
@@ -22,6 +23,7 @@ private:
 public slots:
     void captureScreen();
     void captureArea();
+    void sendFile();
 };
 
 #endif // SYSTEMTRAYACTIONS_H

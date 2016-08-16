@@ -44,12 +44,12 @@ void SystemTrayActions::captureArea()
         http->setFile(path);
         http->setSenderId("Uplimg Nightly");
 
-        QObject::connect(http, &HttpFileUploader::uploadProgress, [](qint64 bytesSent, qint64 bytesTotal)
+        QObject::connect(http, &HttpFileUploader::uploadProgress, [] (qint64 bytesSent, qint64 bytesTotal)
         {
             qDebug() << bytesSent << "/" << bytesTotal;
         });
 
-        QObject::connect(http, &HttpFileUploader::finished, [](HttpFileUploader * sender)
+        QObject::connect(http, &HttpFileUploader::finished, [] (HttpFileUploader * sender)
         {
             qDebug() << sender->getResponse();
             sender->deleteLater();
@@ -59,4 +59,30 @@ void SystemTrayActions::captureArea()
     });
 
     capturer.captureArea();
+}
+
+void SystemTrayActions::sendFile()
+{
+    QString path;
+    HttpFileUploader * http;
+
+    http = new HttpFileUploader;
+    path = QFileDialog::getOpenFileName(Q_NULLPTR, "Choose file");
+
+    http->setHost("https://uplmg.com/file/upload", 443);
+    http->setFile(path);
+    http->setSenderId("Uplimg Nightly");
+
+    QObject::connect(http, &HttpFileUploader::uploadProgress, [](qint64 bytesSent, qint64 bytesTotal)
+    {
+        qDebug() << bytesSent << "/" << bytesTotal;
+    });
+
+    QObject::connect(http, &HttpFileUploader::finished, [](HttpFileUploader * sender)
+    {
+        qDebug() << sender->getResponse();
+        sender->deleteLater();
+    });
+
+    http->sendFile();
 }

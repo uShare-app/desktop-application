@@ -16,6 +16,7 @@ SystemTrayIcon::SystemTrayIcon()
 
     connect(captureScreen, &QAction::triggered, &actions, &SystemTrayActions::captureScreen);
     connect(captureArea, &QAction::triggered, &actions, &SystemTrayActions::captureArea);
+    connect(sendFile, &QAction::triggered, &actions, &SystemTrayActions::sendFile);
     connect(quit, &QAction::triggered, qApp, &QApplication::quit);
 
     setContextMenu(root);
