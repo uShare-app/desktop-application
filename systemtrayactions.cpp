@@ -2,7 +2,7 @@
 
 SystemTrayActions::SystemTrayActions(QObject *parent) : QObject(parent)
 {
-
+    window = nullptr;
 }
 
 /* Todo move sending code to another file */
@@ -85,4 +85,15 @@ void SystemTrayActions::sendFile()
     });
 
     http->sendFile();
+}
+
+void SystemTrayActions::openWindow()
+{
+    if (!window)
+    {
+        window = new AppWindow(this);
+        return;
+    }
+
+    window->show();
 }

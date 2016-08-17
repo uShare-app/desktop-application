@@ -8,6 +8,7 @@
 # include <QPixmap>
 # include <QString>
 
+# include "appwindow.h"
 # include "network/httpfileuploader.h"
 # include "screencapturer.h"
 
@@ -17,13 +18,15 @@ class SystemTrayActions : public QObject
 public:
     explicit SystemTrayActions(QObject *parent = 0);
 
-private:
-    ScreenCapturer capturer;
-
 public slots:
     void captureScreen();
     void captureArea();
     void sendFile();
+    void openWindow();
+
+private:
+    ScreenCapturer capturer;
+    AppWindow * window;
 };
 
 #endif // SYSTEMTRAYACTIONS_H
