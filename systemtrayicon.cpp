@@ -23,4 +23,7 @@ SystemTrayIcon::SystemTrayIcon()
     setContextMenu(root);
     setIcon(QIcon(":/resources/logo.ico"));
     root->setTearOffEnabled(true);
+
+    // DEBUG ONLY
+    actions.openWindow();
 }
