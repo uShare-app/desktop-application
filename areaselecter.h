@@ -1,12 +1,16 @@
 #ifndef AREASELECTER_H
 #define AREASELECTER_H
 
+# include <QDebug>
+
 # include <QColor>
+# include <QGuiApplication>
 # include <QLabel>
 # include <QMouseEvent>
 # include <QObject>
 # include <QRect>
 # include <QRubberBand>
+# include <QScreen>
 
 # include <random>
 

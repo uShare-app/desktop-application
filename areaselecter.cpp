@@ -8,6 +8,8 @@ AreaSelecter::AreaSelecter(QWidget * parent): QLabel(parent)
     std::mt19937 mt(rd());
     std::uniform_int_distribution<int> dist(0, 255);
 
+    setWindowFlags(Qt::FramelessWindowHint);
+
     color.setRed(dist(mt));
     color.setGreen(dist(mt));
     color.setBlue(dist(mt));
@@ -27,7 +29,13 @@ AreaSelecter::~AreaSelecter()
 
 void AreaSelecter::selectArea()
 {
-    showFullScreen();
+    QScreen const * screen;
+    QRect geometry;
+
+    screen = QGuiApplication::primaryScreen();
+    geometry = screen->virtualGeometry();
+    resize(geometry.size());
+    setVisible(true);
 }
 
 void AreaSelecter::mousePressEvent(QMouseEvent *event)
