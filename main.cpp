@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setQuitOnLastWindowClosed(false);
 
-    QQuickStyle::setStyle("Material");
+    QQuickStyle::setStyle("Default");
 
     SystemTrayIcon icon;
     icon.show();

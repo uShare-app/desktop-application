@@ -18,28 +18,39 @@ ApplicationWindow
 
         Page
         {
-            ColumnLayout
+            Item
             {
-                GroupBox
+                anchors.fill: parent;
+                anchors
                 {
-                    title: "General";
-                    ColumnLayout
-                    {
-                        anchors.fill: parent;
-                        CheckBox { text: "Launch on startup"; }
-                    }
+                    margins: 10;
                 }
 
-                GroupBox
+                ColumnLayout
                 {
-                    title: "On successful upload";
-                    ColumnLayout
+
+                    GroupBox
                     {
-                        anchors.fill: parent;
-                        CheckBox { text: "Play a sound"; }
-                        CheckBox { text: "Show notification"; }
-                        CheckBox { text: "Copy link in clipboard"; }
-                        CheckBox { text: "Open in browser"; }
+                        title: "General";
+                        ColumnLayout
+                        {
+                            anchors.fill: parent;
+                            CheckBox { text: "Launch on startup"; }
+                        }
+                    }
+
+                    GroupBox
+                    {
+                        title: "On successful upload";
+                        ColumnLayout
+                        {
+                            anchors.fill: parent;
+                            CheckBox { text: "Play a sound"; }
+                            CheckBox { text: "Show notification"; }
+                            CheckBox { text: "Show upload progress"; }
+                            CheckBox { text: "Copy link in clipboard"; }
+                            CheckBox { text: "Open in browser"; }
+                        }
                     }
                 }
             }
@@ -47,10 +58,67 @@ ApplicationWindow
 
         Page
         {
-            Label
+            Item
             {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
+                anchors.fill: parent;
+                anchors
+                {
+                    margins: 10;
+                }
+
+                ColumnLayout
+                {
+
+                    GroupBox
+                    {
+                        title: "Saving";
+                        ColumnLayout
+                        {
+                            anchors.fill: parent;
+                            CheckBox { id: localSave; text: "Save pictures on computer"; }
+                            RowLayout
+                            {
+                                Text { text: "Upload destination"; }
+                                ComboBox
+                                {
+                                    id: destinationType;
+                                    model: ["Uplimg official server", "Custom server", "Local only"];
+                                    onCurrentIndexChanged:
+                                    {
+                                        if (currentIndex === 2)
+                                        {
+                                            localSave.enabled = false;
+                                            localSave.checked = true;
+                                        }
+                                        else
+                                        {
+                                            localSave.enabled = true;
+                                        }
+                                    }
+                                }
+                            }
+                            GroupBox
+                            {
+                                title: "Custom server";
+                                enabled: destinationType.currentIndex === 1;
+                                GridLayout
+                                {
+                                    anchors.fill: parent;
+                                    columns: 2;
+
+                                    Text { text: "Server's address"; }
+                                    TextField { placeholderText: "Server's address"; }
+                                    Text { text: "Server's port"; }
+                                    TextField { placeholderText: "Remember: https is on 443"; }
+                                    Text { text: "Username"; }
+                                    TextField { placeholderText: "Username"; }
+                                    Text { text: "Password"; }
+                                    TextField { placeholderText: "Password"; }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
