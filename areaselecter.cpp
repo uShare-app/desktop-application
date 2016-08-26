@@ -47,17 +47,24 @@ void AreaSelecter::mouseMoveEvent(QMouseEvent *event)
 
 void AreaSelecter::mouseReleaseEvent(QMouseEvent *event)
 {
+    QRect area;
+
+
     if (event->button() != Qt::LeftButton)
+        return;
+
+    area = QRect(origin, event->pos()).normalized();
+    if (area.height() < 4 || area.width() < 4)
         return;
 
     rubberBand->hide();
     this->hide();
-    emit areaTaken(QRect(origin, event->pos()).normalized());
+    emit areaTaken(area);
 }
 
 void AreaSelecter::keyPressEvent(QKeyEvent * event)
 {
-   if (event->key() != Qt::Key_Escape)
+    if (event->key() != Qt::Key_Escape)
        return;
 
    emit canceled();

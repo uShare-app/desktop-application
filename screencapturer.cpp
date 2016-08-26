@@ -47,6 +47,12 @@ void ScreenCapturer::captureArea()
         emit done(path);
         selecter->deleteLater();
     });
+
+    QObject::connect(selecter, &AreaSelecter::canceled, [=]()
+    {
+        selecter->hide();
+        selecter->deleteLater();
+    });
 }
 
 QString ScreenCapturer::getNewFileName()
