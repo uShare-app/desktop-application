@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     screencapturer.cpp \
     systemtrayactions.cpp \
     areaselecter.cpp \
-    appwindow.cpp
+    appwindow.cpp \
+    qml/qmlsettings.cpp
 
 RESOURCES += qml.qrc \
     resources/resources.qrc
@@ -24,4 +25,5 @@ HEADERS += systemtrayicon.h \
     screencapturer.h \
     systemtrayactions.h \
     areaselecter.h \
-    appwindow.h
+    appwindow.h \
+    qml/qmlsettings.h

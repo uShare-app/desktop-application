@@ -35,7 +35,12 @@ ApplicationWindow
                         ColumnLayout
                         {
                             anchors.fill: parent;
-                            CheckBox { text: "Launch on startup"; }
+                            CheckBox
+                            {
+                                id: launchOnStartup;
+                                text: "Launch on startup";
+                                onCheckedChanged: Settings.setValue("LaunchOnStartup", checked);
+                            }
                         }
                     }
 
@@ -45,11 +50,40 @@ ApplicationWindow
                         ColumnLayout
                         {
                             anchors.fill: parent;
-                            CheckBox { text: "Play a sound"; }
-                            CheckBox { text: "Show notification"; }
-                            CheckBox { text: "Show upload progress"; }
-                            CheckBox { text: "Copy link in clipboard"; }
-                            CheckBox { text: "Open in browser"; }
+                            CheckBox
+                            {
+                                id: playASound;
+                                text: "Play a sound";
+                                onCheckedChanged: Settings.setValue("PlayASound", checked);
+                            }
+
+                            CheckBox
+                            {
+                                id: showNotification;
+                                text: "Show notification";
+                                onCheckedChanged: Settings.setValue("ShowNotification", checked);
+                            }
+
+                            CheckBox
+                            {
+                                id: showUploadProgress;
+                                text: "Show upload progress";
+                                onCheckedChanged: Settings.setValue("ShowUploadProgress", checked);
+                            }
+
+                            CheckBox
+                            {
+                                id: copyLinkInClipboard;
+                                text: "Copy link in clipboard";
+                                onCheckedChanged: Settings.setValue("CopyLinkInClipboard", checked);
+                            }
+
+                            CheckBox
+                            {
+                                id: openInBrowser;
+                                text: "Open in browser";
+                                onCheckedChanged: Settings.setValue("OpenInBrowser", checked);
+                            }
                         }
                     }
                 }
@@ -75,7 +109,13 @@ ApplicationWindow
                         ColumnLayout
                         {
                             anchors.fill: parent;
-                            CheckBox { id: localSave; text: "Save pictures on computer"; }
+                            CheckBox
+                            {
+                                id: localSave;
+                                text: "Save pictures on computer";
+                                onCheckedChanged: Settings.setValue("LocalSave", checked);
+                            }
+
                             RowLayout
                             {
                                 Text { text: "Upload destination"; }
@@ -83,6 +123,7 @@ ApplicationWindow
                                 {
                                     id: destinationType;
                                     model: ["Uplimg official server", "Custom server", "Local only"];
+                                    currentIndex: Settings.value("UploadDestination");
                                     onCurrentIndexChanged:
                                     {
                                         if (currentIndex === 2)
@@ -94,9 +135,11 @@ ApplicationWindow
                                         {
                                             localSave.enabled = true;
                                         }
+                                        Settings.setValue("UploadDestination", currentIndex);
                                     }
                                 }
                             }
+
                             GroupBox
                             {
                                 title: "Custom server";
@@ -135,5 +178,25 @@ ApplicationWindow
         {
             text: qsTr("Saving")
         }
+    }
+
+    Component.onCompleted:
+    {
+        Settings.setValueIfNotSet("LaunchOnStartup", false);
+        Settings.setValueIfNotSet("PlayASound", true);
+        Settings.setValueIfNotSet("ShowNotification", true);
+        Settings.setValueIfNotSet("ShowUploadProgress", false);
+        Settings.setValueIfNotSet("CopyLinkInClipboard", false);
+        Settings.setValueIfNotSet("OpenInBrowser", true);
+        Settings.setValueIfNotSet("LocalSave", false);
+        Settings.setValueIfNotSet("UploadDestination", 0);
+
+        launchOnStartup.checked = Settings.boolValue("LaunchOnStartup");
+        playASound.checked = Settings.boolValue("PlayASound");
+        showNotification.checked = Settings.boolValue("ShowNotification");
+        showUploadProgress.checked = Settings.boolValue("ShowUploadProgress");
+        copyLinkInClipboard.checked = Settings.boolValue("CopyLinkInClipboard");
+        openInBrowser.checked = Settings.boolValue("OpenInBrowser");
+        localSave.checked = Settings.boolValue("LocalSave");
     }
 }

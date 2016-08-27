@@ -2,16 +2,21 @@
 
 AppWindow::AppWindow(QObject *parent) : QObject(parent)
 {
-    engine.load(QUrl(QLatin1String("qrc:/window/main.qml")));
-    root = engine.rootObjects().first();
+    component = new QQmlComponent(&engine, QUrl(QLatin1String("qrc:/window/main.qml")));
+    context = new QQmlContext(&engine);
+
+    QmlSettings * settings = new QmlSettings(this);
+    context->setContextProperty("Settings", settings);
+
+    window = component->create(context);
 }
 
 void AppWindow::show()
 {
-    root->setProperty("visible", true);
+    window->setProperty("visible", true);
 }
 
 void AppWindow::hide()
 {
-    root->setProperty("visible", false);
+    window->setProperty("visible", false);
 }
